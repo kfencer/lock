@@ -98,12 +98,12 @@ abstract class AbstractDbExclusive extends AbstractDb implements Interfaces\DbEx
         return $result;
     }
 
-    final private function _getConnectionId() : string
+    private function _getConnectionId() : string
     {
         return $this->_query('SELECT CONNECTION_ID()');
     }
 
-    final private function _getUsedConnectionId() : ? string
+    private function _getUsedConnectionId() : ? string
     {
         return $this->_query('SELECT IS_USED_LOCK(:key)', [':key' => $this->getKey()]);
     }

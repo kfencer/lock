@@ -60,7 +60,7 @@ abstract class AbstractDbExtended extends AbstractDb implements Interfaces\DbExt
     /**
      * @throws TimeoutException if timeout exceeded
      */
-    final private function _getLock(int $timeout, bool $writeMode) : void
+    private function _getLock(int $timeout, bool $writeMode) : void
     {
         $udf = $writeMode ? 'service_get_write_locks' : 'service_get_read_locks';
 
