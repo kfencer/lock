@@ -94,7 +94,7 @@ abstract class AbstractDb
     protected function _convertLockException(\Exception $e, int $timeout, bool $writeMode = true) : void
     {
         while (true) {
-            if ($e === null || $e instanceof PDOException) {
+            if ($e instanceof PDOException || !$e->getPrevious()) {
                 break;
             }
 
