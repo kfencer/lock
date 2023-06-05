@@ -35,22 +35,22 @@ abstract class AbstractDb
         $this->_key = md5($key);
     }
 
-    public static function setPdoPromise(Closure $pdoPromise) : void
+    public static function setPdoPromise(Closure $pdoPromise): void
     {
         self::$_pdoPromise = $pdoPromise;
     }
 
-    final public function getKey() : string
+    final public function getKey(): string
     {
         return $this->_key;
     }
 
-    protected static function _getPdoPromise() : Closure
+    protected static function _getPdoPromise(): Closure
     {
         return self::$_pdoPromise;
     }
 
-    protected static function _getPdo() : ? PDO
+    protected static function _getPdo(): ?PDO
     {
         return self::_getPdoPromise() === null ? null : self::_getPdoPromise()();
     }
@@ -91,13 +91,9 @@ abstract class AbstractDb
     /**
      * @throws TimeoutException | \Exception
      */
-    protected function _convertLockException(\Exception $e, int $timeout, bool $writeMode = true) : void
+    protected function _convertLockException(\Exception $e, int $timeout, bool $writeMode = true): void
     {
-        while (true) {
-            if ($e instanceof PDOException || !$e->getPrevious()) {
-                break;
-            }
-
+        while (!$e instanceof PDOException && $e->getPrevious()) {
             $e = $e->getPrevious();
         }
 
@@ -116,5 +112,4 @@ abstract class AbstractDb
 
         throw $e;
     }
-
 }
