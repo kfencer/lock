@@ -16,7 +16,7 @@ interface DbExtended extends Db
      *
      * @throws Lock\TimeoutException if timeout exceeded
      */
-    public function lockRead(int $timeout = null) : void;
+    public function lockRead(int $timeout = null): void;
 
     /**
      * Grab the lock in write mode.
@@ -28,7 +28,7 @@ interface DbExtended extends Db
      *
      * @throws Lock\TimeoutException if timeout exceeded
      */
-    public function lockWrite(int $timeout = null) : void;
+    public function lockWrite(int $timeout = null): void;
 
     /**
      * Release the lock.
