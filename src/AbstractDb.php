@@ -45,6 +45,11 @@ abstract class AbstractDb
         return $this->_key;
     }
 
+    final public function ping(): bool
+    {
+        return (bool) (int) $this->_query('SELECT 1');
+    }
+
     protected static function _getPdoPromise(): Closure
     {
         return self::$_pdoPromise;
